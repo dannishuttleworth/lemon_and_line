@@ -9,10 +9,13 @@
   <body>
     <div class="container">
       <h1><span class="title-emoji">🍋</span> &amp; | Randomiser</h1>
-      <button id="randomBtn">Randomise</button>
-      <p id="songResult">No song selected yet.</p>
-      <button id="yesBtn">Yes — remove it</button>
-      <button id="noBtn">No — randomise again</button>
+      <p id="songResult"></p>
+      <div class="song-actions">
+        <button id="yesBtn">Add to song list</button>
+        <button id="shuffleBtn">Shuffle</button>
+      </div>
+      <button id="clearBtn" hidden>Clear List</button>
+      <div id="selectedSongs" class="selected-songs"></div>
     </div>
     <script src="js/script.js"></script>
   </body>

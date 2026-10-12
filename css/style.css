@@ -210,3 +210,39 @@ li {
     transform: scale(1);
   }
 }
+
+.song-actions {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 15px;
+}
+
+.song-actions button {
+  width: 150px; /* prevents full-width buttons */
+  padding: 15px 20px;
+  font-size: 0.9rem;
+}
+
+.song-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 24px;
+}
+
+.selected-songs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.song-tile {
+  padding: 14px;
+  border-radius: 10px;
+  background: #3b738f90;
+  color: #4c1d95;
+  text-align: center;
+  font-weight: 600;
+}

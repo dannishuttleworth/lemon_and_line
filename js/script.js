@@ -29,29 +29,14 @@ let songs = [
   "Scream",
 ];
 
-const randomButton = document.querySelector("#randomBtn");
 const songResult = document.querySelector("#songResult");
 const yesButton = document.querySelector("#yesBtn");
-const noButton = document.querySelector("#noBtn");
+const shuffleButton = document.querySelector("#shuffleBtn");
+const selectedSongs = document.querySelector("#selectedSongs");
+const clearButton = document.querySelector("#clearBtn");
 
 let remainingSongs = [...songs];
 let currentSong = null;
-
-function getRandomSong() {
-  const randomIndex = Math.floor(Math.random() * songs.length);
-
-  return songs[randomIndex];
-}
-
-randomButton.addEventListener("click", function () {
-  const song = getRandomSong();
-
-  songResult.textContent = song;
-});
-
-songResult.classList.remove("song-selected");
-void songResult.offsetWidth; // restarts the pop animation on every click
-songResult.classList.add("song-selected");
 
 function getRandomSong() {
   if (remainingSongs.length === 0) {
@@ -66,29 +51,55 @@ function showRandomSong() {
   currentSong = getRandomSong();
 
   if (!currentSong) {
-    songResult.textContent = "No songs left!";
+    songResult.textContent = "All songs have been selected!";
+    yesButton.disabled = true;
+    shuffleButton.disabled = true;
     return;
   }
 
   songResult.textContent = currentSong;
 
-  // Restart pop animation
+  // Restarts the pop animation on every click
   songResult.classList.remove("song-selected");
   void songResult.offsetWidth;
   songResult.classList.add("song-selected");
 }
 
-randomButton.addEventListener("click", showRandomSong);
+shuffleButton.addEventListener("click", showRandomSong);
 
 yesButton.addEventListener("click", () => {
   if (!currentSong) return;
 
-  remainingSongs = remainingSongs.filter(song => song !== currentSong);
-  currentSong = null;
+  // Add the current song to the selected-song tile area
+  const songTile = document.createElement("div");
+  songTile.classList.add("song-tile");
+  const songNumber = selectedSongs.children.length + 1;
+  songTile.textContent = `${songNumber}. ${currentSong}`;
+  selectedSongs.appendChild(songTile);
+  clearButton.hidden = false;
+
+  // Remove only this chosen copy from the randomiser list
+  const songIndex = remainingSongs.indexOf(currentSong);
+  remainingSongs.splice(songIndex, 1);
+
+  // Randomise the next song
   showRandomSong();
 });
 
-noButton.addEventListener("click", () => {
-  // Keep it in the list, but choose again
+shuffleButton.addEventListener("click", () => {
+  // Leave the song available, then choose again
   showRandomSong();
+});
+
+clearButton.addEventListener("click", () => {
+  remainingSongs = [...songs]; // Restore every original song
+  currentSong = null;
+  selectedSongs.innerHTML = ""; // Remove all displayed song tiles
+
+  yesButton.disabled = false;
+  shuffleButton.disabled = false;
+
+  clearButton.hidden = true;
+
+  songResult.textContent = "No song selected yet.";
 });
