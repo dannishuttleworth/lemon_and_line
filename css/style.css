@@ -1,0 +1,212 @@
+/* Reset some default browser behaviour */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f7f5;
+  min-height: 100vh;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: white;
+  width: 520px;
+  max-width: calc(100% - 2rem);
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("../cowboy-boots.png") center center / contain no-repeat;
+  opacity: 0.45; /* raise slightly if you want them more visible */
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(90deg, #3b738f, #5fa8c7, #3b738f);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.title-emoji {
+  font-family:
+    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+
+h3 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b738f;
+}
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b738f;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+button:hover {
+  background-color: #315f77;
+  box-shadow: 0 4px 10px rgba(59, 115, 143, 0.3);
+  transform: translateY(-2px);
+}
+
+#recipe {
+  margin: 1.5rem 0;
+
+  padding: 1rem;
+
+  background-color: #f1f8e9;
+
+  border-radius: 8px;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  background-color: #f7f7f7;
+
+  padding: 0.75rem;
+
+  margin-bottom: 0.5rem;
+
+  border-radius: 6px;
+
+  text-align: left;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.days label {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  cursor: pointer;
+}
+
+.days input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+#weeklyPlan {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+}
+#weeklyPlan li {
+  background: #f5f5f5;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+}
+
+#songResult {
+  margin-top: 1.5rem;
+  min-height: 2rem;
+  font-size: 1.1rem;
+  transition: all 0.35s ease;
+}
+
+#songResult.song-selected {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(
+    90deg,
+    #3b738f,
+    #e7b44a,
+    #5fa8c7,
+    #e7b44a,
+    #3b738f,
+    #c83d95
+  );
+  background-size: 300% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation:
+    song-shimmer 10s linear infinite,
+    song-pop 1s ease-out;
+  text-shadow: 0 0 14px rgba(202, 112, 190, 0.35);
+}
+
+@keyframes song-shimmer {
+  to {
+    background-position: 300% center;
+  }
+}
+
+@keyframes song-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  70% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
